@@ -74,7 +74,6 @@ class Tetroid {
         if(tetris.softDrop && frameCount % 4 == 0) doUpdate = true;
 
         if(!doUpdate) return;
-        console.log(tetris.dropSpeed);
 
         this.posY++;
 

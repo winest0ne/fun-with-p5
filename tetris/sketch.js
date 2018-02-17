@@ -141,7 +141,6 @@ class Tetris {
     }
 
 	gameOver(){
-		console.log("gameOver")
 		this.isGameOver = true;
 	}
 
