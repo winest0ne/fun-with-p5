@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Fun with P5.js</title>
+    <style>
+		body {
+			background: #00001d;
+      		margin:0;
+			padding:0;
+			overflow: hidden;
+			font-family: sans-serif;
+			text-align: center;
+			color: white;
+            display:grid;
+            grid-template-columns: auto auto auto;
+            grid-template-rows: auto;
+		}
+
+        #headline {
+            grid-column: 2;
+        }
+        .container {
+            background:#000035;
+            grid-column: 2;
+            padding:20px;
+        }
+        .container>h2 {
+            margin: 0;
+            color: yellow;
+            text-align: left;
+            text-decoration: underline;
+        }
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+        li {
+            list-style: none;
+            margin:0;
+        }
+        a {
+            font-size: 20;
+            text-align: center;
+            color: rgb(255, 208, 0);
+            text-decoration: none;
+        }
+        a:hover {
+            color: yellow;
+        }
+	</style>
+</head>
+<h1 id="headline">Fun with <span style="color: red">P5.js</span></h1>
+<div class="container">
+    <h2>Arcade Games:</h2>
+    <div>
+    <ul>
+
+            <li><a href="./tetris/index.html"><h2>Play Tetris</h2></a></li>
+    </ul>
+</div>
+<body>
+    
+</body>
+</html>
