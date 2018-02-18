@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>pong</title>
+
+	<script src="../libraries/p5.js"></script>
+	<script src="../libraries/p5.dom.js"></script>
+	<script src="../libraries/p5.sound.js"></script>
+	<script src="paddle.js"></script>
+	<script src="ball.js"></script>
+	<script src="sketch.js"></script>
+
+	<style>
+		body {
+      		margin:0;
+			padding:0;
+			overflow: hidden;
+			font-family: sans-serif;
+			color: white;
+			background: rgb(0, 16, 43);
+			text-align: center;
+		}
+
+		canvas {
+		
+			grid-column: 2 / span 2;
+			border: solid rgb(144, 141, 206) 4px;
+		}
+
+		#container {
+			width: 600px;
+			margin: auto;
+			
+		}
+
+		#score-panel {
+			margin-bottom: 20px;
+			font-size: 30px;
+			color: rgb(255, 230, 0);
+		}
+
+
+	</style>
+</head>
+<body>
+
+			<h1>PONG</h1>
+			<div id="score-panel">
+				<span id="player1">0</span>
+				<span style="margin: 0 20px;">-</span>
+				<span id="player2">0</span>
+			</div>
+
+</body>
+</html>
