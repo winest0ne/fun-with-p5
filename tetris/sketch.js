@@ -8,13 +8,18 @@
 
 let CELL_SIZE = 20;
 let CONTAINER_OFFSET = {x: 20, y:100};
+let DIRECTION = {UP: 0, RIGHT: 1, DOWN: 2, LEFT: 3};
 let DEBUG = false;
 let BG_COLOR1 = '#00001d';
 let BG_COLOR2 = '#20205c';
 let tetris;
 
 function setup() {
-	createCanvas(600, CELL_SIZE * 26);
+	let width = 600;
+	if(displayWidth < width)
+		width = displayWidth;
+
+	createCanvas(width, CELL_SIZE * 26);
 	tetris = new Tetris();
 }
 
@@ -51,6 +56,8 @@ class Tetris {
 		this.dropSpeed;
 		this.rows = 0;
 		this.score = 0;
+		this.touchInput;
+		this.swipeDir;
 		this.turnRequest = false;
 		this.keyHold = false;
 		this.isGameOver = false;
@@ -58,6 +65,7 @@ class Tetris {
 		this.createContainer();
 		frameRate(60);
 	}
+
 
 	draw(){	
 		this.update();
@@ -79,7 +87,7 @@ class Tetris {
 		this.dropSpeed = this.getNESDropSpeed(this.level);
 		
 
-		if(this.currTetr === undefined) {
+		if(this.currTetr == undefined) {
 			this.rowCheck();
 			this.popTetroid();
 		}
@@ -91,7 +99,7 @@ class Tetris {
 
 		if(keyIsDown(DOWN_ARROW)) this.softDrop = true; else this.softDrop = false;
 
-		if(!this.keyHold || frameCount % 6 == 0) {
+		if(!this.keyHold || frameCount % 8 == 0) {
 			if(keyIsDown(LEFT_ARROW)) this.currTetr.move(-1);
 			if(keyIsDown(RIGHT_ARROW)) this.currTetr.move(1);	
 			this.keyHold = true;
@@ -100,7 +108,6 @@ class Tetris {
 		if(!keyIsDown(LEFT_ARROW) && !keyIsDown(RIGHT_ARROW) ) {
 			this.keyHold = false;
 		}
-
 		this.currTetr.update();
 	}
 
@@ -219,6 +226,26 @@ class Tetris {
 	}
 
 	showNextTetr(){
+
+		let showInfo = (name, value, x, y) => {
+			//draw name
+			textSize(30);
+			fill(255);
+			text(name, x, y);
+			//draw value
+			textSize(25);
+			fill(255,240,0);
+			text(value, x, y + 40); 
+		}
+
+		let leadingZeroes = (value, digits) =>{
+			let str = value.toString();
+			for (let i = str.length; i < digits; i++){
+				str = '0' + str;
+			}
+			return str;
+		}
+
 		textAlign(RIGHT,TOP);
 		fill(255);
 
@@ -239,29 +266,11 @@ class Tetris {
 
 
 
-		function leadingZeroes(value, digits){
-			let str = value.toString();
-			for (let i =str.length; i < digits; i++){
-				str = '0' + str;
-			}
-			return str;
-		}
-
-
-		function showInfo(name, value, x, y) {
-
-			textSize(30);
-			fill(255);
-			text(name, x, y);
-
-			textSize(25);
-			fill(255,240,0);
-			text(value, x, y + 40); 
-		}
 		
-        
-    }
 
+
+		
+    }
 
 	createContainer(){
 		this.container = new Array(20);
@@ -272,26 +281,24 @@ class Tetris {
 	}
 
 	fillBag(){
+		let swap = (arr ,i, j) => {
+			let temp = arr[i];
+			arr[i] = arr[j];
+			arr[j] = temp; 
+		}
 		
-		let tempBag = new Array(7);
+		let tempBag = [7];
 		for(let i = 0; i < 7; i++) {
 			tempBag[i] = new Tetroid(i);
 		}
 
 		for(let i = 7; i > 0; i--) {
-			let rnd = nextInt(i - 1);
 			let startIdx = 7 - i;
-			let index2 = rnd + startIdx;
-			swap(tempBag, startIdx, index2);
+			let rndIndex = nextInt(i - 1) + startIdx;
+			swap(tempBag, startIdx, rndIndex);
 		}
 
-		function swap(arr ,i, j) {
-			let temp;
-			temp = arr[i];
-			arr[i] = arr[j];
-			arr[j] = temp; 
-		}
-		
+
 		return tempBag;
 	}
 
